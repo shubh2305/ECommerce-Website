@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+{% extends 'account/base.html' %}
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block extra_head %}
+    <link rel="stylesheet" href="{% static 'core/styles-home.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500&display=swap" rel="stylesheet">
+  {% endblock %}
+  <title>Document</title>
+</head>
+{% block content %}
+    {% for product in products %}
+    
+      <div class="card mt-5 ml-3 mr-3" style="width: 18rem; display: inline-flex;">
+        <img src="{{ product.image.url }}" class="card-img-top" alt="..." style="height: 15rem;">
+        <div class="card-body">
+          <a href="{{ product.get_absolute_url }}" class="card-title">{{ product.title }}</a>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">{{ product.stock }}</li>
+          <li class="list-group-item">₹ {{ product.price }}</li>
+        </ul>
+      </div>
+    
+    {% endfor %}
+{% endblock %}

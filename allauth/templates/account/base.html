@@ -1,0 +1,70 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block head_title %}{% endblock %}</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link   rel="stylesheet" 
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" 
+            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" 
+            crossorigin="anonymous">
+    
+
+    <link rel="stylesheet" href="{% static 'core/styles-base.css' %}">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;300&display=swap" rel="stylesheet">
+    {% block extra_head %}
+    {% endblock %}
+  </head>
+  <body class="body">
+    
+    {% block body %}
+
+      {% if messages %}
+        <div>
+          <ul class="alert alert-success">
+            {% for message in messages %}
+              <li>{{message}}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      {% endif %}
+
+      <nav class="navbar bg-dark">
+        <div class="container">
+        <h1 class="navbar-brand"><a href="/">ECommerce</a></h1>
+        <ul>
+          {% if user.is_authenticated %}
+            <a href="{% url 'cart-list' %}" class="mr-4"><i class="fas fa-shopping-cart"></i></a>
+            <a class="btn btn-danger" href="{% url 'account_logout' %}" id="sign-out">Sign Out</a>
+          {% else %}
+            <li><a href="{% url 'account_login' %}">Sign In</a></li>
+            <li><a href="{% url 'account_signup' %}">Sign Up</a></li>
+          {% endif %}
+        </ul>
+        </div>
+      </nav>
+      <div class="container main">
+          {% block content %}
+          {% endblock %}
+      </div>
+    {% endblock %}
+    
+    {% block extra_body %}
+    {% endblock %}
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" 
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" 
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" 
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" 
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" 
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" 
+            crossorigin="anonymous"></script>
+  </body>
+  
+</html>

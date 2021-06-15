@@ -1,0 +1,57 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.checkout-wrapper {
+  background-color: #fff;
+  width: 50%;
+  border: 1px solid lightgrey;
+  border-radius: 10px;
+  padding: 3% 5%;
+}
+
+.checkout-wrapper > hr {
+  color: lightgray;
+}
+
+.country-zip-code,
+.checkboxes > *,
+.radios > * {
+  display: flex;
+  flex-direction: row;
+}
+
+.zip-code, 
+.country {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+}
+
+.form-group select {
+  width: 80%;
+}
+
+.checkboxes,
+.radios {
+  display: flex;
+  flex-direction: column;
+}
+
+.same-shipping-address > input,
+.save-info > input,
+.stripe > input,
+.paypal > input {
+  margin: 6px 8px 8px 0;
+}
+
+button {
+  width: 100%;
+}
+
+img {
+  display: none;
+}

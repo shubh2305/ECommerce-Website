@@ -1,0 +1,12 @@
+.card {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  border: none;
+  margin: 0 3%;
+  align-items: center;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.list-group li {
+  border: 0;
+  text-align: center;
+}

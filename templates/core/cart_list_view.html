@@ -1,0 +1,37 @@
+{% extends "account/base.html" %}
+{% load static %}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'core/styles-cart.css' %}">
+{% endblock extra_head %}
+
+{% block content %}
+  <div class="container-fluid mt-5">
+    {% if orders.item.all %}
+      <h1 class="ml-2 mb-5">Your Shopping Cart</h1>
+      <a href="{% url 'checkout' %}" class="btn btn-secondary mb-5">Proceed to Checkout >></a>
+      {% for order in orders.item.all %}
+        <div class="cart-list-wrapper">
+          <img class="cart-product-image" src="{{ order.item.image.url }}" alt="">
+          <div class="item-detail">
+            <p>{{ order.item.title }}</p>
+            <p style="font-size: 16px;">
+              <a href="{% url 'remove-single-item-from-cart' order.item.slug %}" class="mr-2">
+                <i class="fas fa-minus"></i>
+              </a>
+                 {{ order.quantity }}
+              <a href="{% url 'add-to-cart' order.item.slug %}" class="ml-2">
+                <i class="fas fa-plus"></i>
+              </a>
+            </p>
+            <p>₹ {{ order.get_amount }}</p>
+            <a href="{{ order.item.get_remove_from_cart_url }}"><i class="far fa-trash-alt"></i></a>
+          </div>
+        </div>
+      {% endfor %}
+      <strong class="mt-5 mb-5">Total: ₹ {{ orders.get_final_amount }}</strong>
+    {% else %}
+      <img src="/media/empty-cart.png" alt="" srcset="">
+    {% endif %}
+    <a href="{% url 'product_list_view' %}" class="btn btn-secondary cont-shop">Continue Shopping</a>
+  </div>
+{% endblock content %}  

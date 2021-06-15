@@ -1,0 +1,71 @@
+{% extends "account/base.html" %}
+
+{% load static %}
+{% load crispy_forms_tags  %}
+{% block extra_head %}
+  <link rel="stylesheet" href="{% static 'core/styles-checkout.css' %}">
+{% endblock %}
+
+{% block content %}
+  <div class="checkout-wrapper mt-5 mb-5">
+    <h1>Continue your payment process</h1>
+    <hr>
+    <!-- <form action="" method="post">
+      {% csrf_token %}
+      {{ form }}
+      <button class="btn btn-primary">CONTINUE TO CHECKOUT</button>
+    </form> -->
+    <form action="" method="POST">
+      {% csrf_token %}
+      <h2 class="mb-3">Shipping Address</h2>
+      <div class="form-group">
+        <label for="address1">Address 1</label>
+        {{ form.address1 }}
+      </div>
+
+      <div class="form-group">
+        <label for="address1">Address 2</label>
+        {{ form.address2 }}
+      </div>
+
+      <div class="form-group country-zip-code">
+        <div class="country">
+          <label for="country">Country</label>
+          {{ form.country }}
+        </div>
+
+        <div class="zip-code">
+          <label for="zipCode">Zip Code</label>
+          {{ form.zip_code }}
+        </div>
+      </div>
+      <hr>
+
+      <div class="form-group checkboxes">
+        <div class="same-shipping-address">
+          {{ form.same_shipping_address }}
+          <p>Shipping address is the same as by billing address</p>
+        </div>
+
+        <div class="save-info">
+          {{ form.save_info }}
+          <p>Save this information for next time</p>
+        </div>
+      </div>
+      <hr>
+
+      <div class="form-group radios">
+        {% for name, value in form.fields.payment_options.choices %}
+          <div class="stripe">
+            <input type="radio" name="payment_options" value="{{ name }}" id="{{ name }}">
+            <label for="payment-method">{{ value }}</label>
+          </div>
+        {% endfor %}
+      </div>
+      <hr>
+
+      <button class="btn btn-primary">CONTINUE TO CHECKOUT</button>
+    </form>
+  </div>
+  
+{% endblock content %}

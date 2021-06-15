@@ -1,0 +1,57 @@
+{% extends 'account/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+
+<head>
+  {% block head_title %}
+    {{ product.title }}
+  {% endblock %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% block extra_head %}
+    <link rel="stylesheet" href="{% static 'core/styles-detail.css' %}"> 
+  {% endblock %}
+</head>
+
+{% block content %}
+  <div class="mt-5">
+    
+    <img src="{{ product.image.url }}" alt="">
+    
+    <div class="aside">
+      <h4>{{ product.title }}</h4>
+      <h4>{{ product.price }}</h4>
+      {% if product.description %}
+        <p>{{ product.description }}</p>
+      {% endif %}
+      <a href="{{ product.get_add_to_cart_url }}" class="btn btn-outline-primary">Add to Cart</a>
+      <a href="{{ product.get_remove_from_cart_url }}" class="btn btn-outline-danger">Remove from Cart</a>
+      <a class="btn btn-primary" style="color: white;">Buy Now</a>
+    </div>
+  </div>
+
+  <div class="review-wrapper mt-5">
+    <h1>Review</h1>
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+      Button with data-target
+    </button>
+    <div class="collapse" id="collapseExample">
+      <form action="" method="post" class="mt-4">
+        {% csrf_token %}
+        <div class="form-group">
+          {{ form.review }}
+          <button class="btn btn-primary" type="submit">Submit</button>
+        </div>
+      </form>
+    </div>  
+    <hr>
+    <div class="all-reviews mt-2">
+      {% for review in product.reviews.all %}
+        <small>{{ review.user }}</small>
+        <p>{{ review.review }}</p>
+        <hr>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}

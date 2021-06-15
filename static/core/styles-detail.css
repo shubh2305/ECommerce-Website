@@ -1,0 +1,25 @@
+
+img {
+  width: 50%;
+  height: 70vh;
+}
+
+.aside {
+  float: right;
+  width: 40%;
+}
+
+.review-wrapper {
+  width: 50%;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.form-group > input {
+  border-radius: 50px;
+  width: 80%;
+}
